@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Memories Niki❤️</title>
+
+  <!-- Romantic Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Candle light glow overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,200,150,0.25), rgba(0,0,0,0.15));
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 16px;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .timeline {
+      max-width: 800px;
+      margin: auto;
+      padding: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .memory {
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .memory:hover {
+      transform: scale(1.02);
+    }
+
+    .memory h2 {
+      margin: 0;
+      color: #e75480;
+      font-size: 1.2rem;
+    }
+
+    .memory .date {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 6px;
+    }
+
+    /* Romantic font for opened messages */
+    .memory .details {
+      display: none;
+      margin-top: 10px;
+      line-height: 1.6;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 12px;
+      color: #fff;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 22px;
+      animation: floatUp 5s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Butterfly effect */
+    .butterfly {
+      position: fixed;
+      bottom: -30px;
+      font-size: 26px;
+      pointer-events: none;
+      animation: flyUp 6s ease-in forwards;
+      z-index: 2;
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      50% { transform: translateY(-60vh) translateX(30px); }
+      100% { transform: translateY(-120vh) translateX(-30px) scale(1.2); opacity: 0; }
+    }
+
+    /* Mobile tightening */
+    @media (max-width: 480px) {
+      .memory { padding: 14px; }
+      .memory h2 { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9b9e6edc2e.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1>Our Memories Niki❤️</h1>
+    <p>Every moment with you is my favorite story</p>
+  </header>
+
+  <section class="timeline">
+
+    <div class="memory" onclick="toggleDetails(this)">
+      <h2>The Day We First Talked</h2>
+      <div class="date">April 2018</div>
+      <div class="details">
+        I still remember how nervous and excited I felt. That one conversation changed everything for me.
+      </div>
+    </div>
+
+    <div class="memory" onclick="toggleDetails(this)">
+      <h2>Our First Kiss</h2>
+      <div class="date">22 May 2022</div>
+      <div class="details">
+        Your smile, the way you laughed, and how time flew without us noticing. I knew then.
+      </div>
+    </div>
+
+    <div class="memory" onclick="toggleDetails(this)">
+      <h2>That Silly Fight 😅</h2>
+      <div class="date">Which was meant to be our first cry</div>
+      <div class="details">
+        Even our fights taught me how much I never want to lose you.
+      </div>
+    </div>
+
+    <div class="memory" onclick="toggleDetails(this)">
+      <h2>When You Made Me Feel Safe</h2>
+      <div class="date">A random night ✨</div>
+      <div class="details">
+        Even when you were sleepy, I was scared and sick — you stayed by my side the whole time.
+      </div>
+    </div>
+
+    <div class="memory secret" onclick="unlockSecret()">
+      <h2>🔒 A Secret Memory</h2>
+      <div class="date">Tap to unlock</div>
+    </div>
+
+  </section>
+
+  <footer>
+    Made with ❤️ just for you
+  </footer>
+
+  <script>
+    let musicStarted = false;
+
+    function toggleDetails(element) {
+      const details = element.querySelector('.details');
+      if (!details) return;
+
+      details.style.display = details.style.display === 'block' ? 'none' : 'block';
+
+      if (!musicStarted) {
+        document.getElementById('bgMusic').play().catch(()=>{});
+        musicStarted = true;
+      }
+    }
+
+    function releaseButterflies(count = 25) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const butterfly = document.createElement('div');
+          butterfly.className = 'butterfly';
+          butterfly.innerText = '🦋';
+          butterfly.style.left = Math.random() * 100 + 'vw';
+          document.body.appendChild(butterfly);
+          setTimeout(() => butterfly.remove(), 7000);
+        }, i * 120);
+      }
+    }
+
+    function unlockSecret() {
+      const password = prompt("💖 Do you know what I love about you the most? :");
+
+      if (password === "Eyes") {   // ← CHANGE PASSWORD HERE
+        const secret = document.querySelector('.secret');
+        secret.innerHTML = `
+          <h2 style="font-family:'Great Vibes', cursive;">💌 The Truth</h2>
+          <div class="date">Always</div>
+          <div class="details" style="display:block;">
+            No matter what happens, you are my home. I choose you, again and again till the very last breadth.
+          </div>
+        `;
+        releaseButterflies(30);
+      } else {
+        alert("You are there baby try again … but I love that you tried 💕");
+      }
+    }
+
+    /* Floating hearts */
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 700);
+  </script>
+
+</body>
+</html>
